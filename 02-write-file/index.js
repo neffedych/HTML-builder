@@ -7,6 +7,9 @@ const data = prompt('Hey there. Tell us something? ');
 let writeFile = fs.createWriteStream(__dirname + '/text.txt', {flags : 'a'}); // creating txt file
 writeFile.write(data);
 
+if(data === "exit"){
+    process.exit();
+};
 
 process.on('exit', function (){
     console.log('See you later!');
