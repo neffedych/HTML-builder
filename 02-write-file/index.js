@@ -3,13 +3,23 @@ const path = require('node:path');
 const prompt = require('prompt-sync')({sigint: true});
 
 
-const data = prompt('Hey there. Tell us something? ');
-let writeFile = fs.createWriteStream(__dirname + '/text.txt', {flags : 'a'}); // creating txt file
+
+let isTrue = true;
+const filePath = __dirname + '/text.txt';
+
+let data = prompt('Hey there. Tell us something? ');
+let writeFile = fs.createWriteStream(filePath); // creating txt file
 writeFile.write(data);
 
-if(data === "exit"){
-    process.exit();
-};
+while(isTrue){
+    let data1 = prompt('');
+    fs.appendFileSync(filePath, data1);
+
+      if(data1 === "exit"){
+        isTrue = false;
+        process.exit();
+    };
+}
 
 process.on('exit', function (){
     console.log('See you later!');
